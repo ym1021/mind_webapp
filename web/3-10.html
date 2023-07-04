@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS 위치 속성</title>
+    <style type="text/css">
+      div {
+        position: relative;
+        border: thin solid;
+        background-color: #ffcccc;
+        margin-bottom: 10px;
+      }
+      h1 {
+        border: thin slid;
+        background-color: yellow;
+        font-size: 20px;
+      }
+      p {
+        border: thin solid;
+        background-color: #ccffff;
+      }
+      #tst1 {
+        position: static;
+      }
+      #tst2 {
+        position: relative;
+        top: 20px;
+        left: 50px;
+      }
+      #tst3 {
+        position: absolute;
+        top: 30px;
+        left: 100px;
+      }
+      #tst4 {
+        position: fixed;
+        top: 300px;
+        left: 60px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <p id="tst1">텍스트 박스 위치 = static.</p>
+      <p id="tst2">텍스트 박스 위치 = relative.</p>
+      <p id="tst3">텍스트 박스 위치 = absolute.</p>
+      <p id="tst4">
+        텍스트 박스 위치 = fixed. 이 텍스트 윈도우가 스크롤될 때, 이박스는
+        움직이지 않는다.
+      </p>
+      <h1>텍스트 박스 위치 = default</h1>
+    </div>
+  </body>
+</html>

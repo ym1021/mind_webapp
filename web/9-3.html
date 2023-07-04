@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <p id="demo">현재 위치정보를 얻기 위하여 버튼을 클릭...</p>
+    <button onclick="getLocation()">위치정보</button>
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSpQV5SLCciOykAh3kB3PTltE6oXBoxfs&callback=initMap"></script>
+    <script>
+      var x = document.getElementById("demo");
+
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+          x.innerHTML = "이 브라우저는 지리적 위치를 지원하지 않습니다.";
+        }
+      }
+
+      function showPosition(position) {
+        lat = 35.9135;
+        lon = 128.80256;
+        latlon = new google.maps.LatLng(lat, lon);
+        mapholder = document.getElementById("map");
+        mapholder.style.height = "250px";
+        mapholder.style.width = "500px";
+        var myOptions = {
+          center: latlon,
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          mapTypeControl: false,
+          navigationControlOptions: {
+            style: google.maps.NavigationControlStyle.SMALL,
+          },
+        };
+        var map = new google.maps.Map(
+          document.getElementById("map"),
+          myOptions
+        );
+        var marker = new google.maps.Marker({
+          position: latlon,
+          map: map,
+          title: "당신의 현 위치...",
+        });
+      }
+
+      function showError(error) {
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            x.innerHTML = "사용자가 지리적 위치에 대한 요청을 거부하였습니다.";
+            break;
+          case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "위치 정보를 이용할 수 없습니다.";
+            break;
+          case error.TIMEOUT:
+            x.innerHTML = "위치 요청이 시간 초과되었습니다.";
+            break;
+          case error.UNKNOWN_ERROR:
+            x.innerHTML = "알 수 없는 오류가 발생했습니다.";
+            break;
+        }
+      }
+    </script>
+  </body>
+</html>

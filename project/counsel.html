@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>학생상담센터</title>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  </head>
+
+  <body>
+    <div data-role="page" id="stress-management-page">
+      <div data-role="header" class="w3-container w3-teal">
+        <h1>고요한 마음을 위해</h1>
+      </div>
+      <div data-role="content">
+        <a
+          href="main.html"
+          data-icon="home"
+          class="ui-link ui-btn ui-icon-home ui-btn-icon-top w3-sand"
+          >홈</a
+        >
+        <div data-role="navbar" data-grid="c">
+          <ul>
+            <li>
+              <a href="stress.html" class="w3-sand">스트레스</a>
+            </li>
+            <li>
+              <a href="meditations.html" class="w3-sand">명상</a>
+            </li>
+            <li>
+              <a href="mood.html" class="w3-sand">감정 일기</a>
+            </li>
+            <li>
+              <a href="counsel.html" class="w3-sand">상담센터</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <h2 style="margin: 10px">상담센터란?</h2>
+      <p style="margin: 10px">
+        개인상담, 심리검사, 집단상담 등을 통해 전문적이고 실제적인 도움을
+        제공하는 곳
+      </p>
+      <h4 style="margin: 10px" id="demo">대구가톨릭대학교 학생상담센터 위치</h4>
+      <button onclick="getLocation()">위치정보</button>
+      <div id="map"></div>
+      <iframe src="map.html" width="100%" height="500"></iframe>
+      <div
+        data-role="footer"
+        class="w3-container w3-gray w3-opacity my-footer"
+        style="margin-top: 20px"
+      >
+        <p>
+          출처 :
+          <a
+            href="https://counsel.cu.ac.kr"
+            style="color: #000000; text-decoration: none"
+            >https://counsel.cu.ac.kr</a
+          >
+        </p>
+      </div>
+      <div
+        data-role="footer"
+        data-position="fixed"
+        data-id="footer"
+        class="w3-container w3-teal w3-opacity"
+      >
+        <h1>웹앱개발 텀프로젝트<br />스마트IoT전공 20116940 김보경</h1>
+      </div>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSpQV5SLCciOykAh3kB3PTltE6oXBoxfs&callback=initMap"></script>
+    <script>
+      var x = document.getElementById("demo");
+
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+          x.innerHTML = "이 브라우저는 지리적 위치를 지원하지 않습니다.";
+        }
+      }
+
+      function showPosition(position) {
+        lat = 35.9107961;
+        lon = 128.8093684;
+        latlon = new google.maps.LatLng(lat, lon);
+        mapholder = document.getElementById("map");
+        mapholder.style.height = "250px";
+        mapholder.style.width = "500px";
+        var myOptions = {
+          center: latlon,
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          mapTypeControl: false,
+          navigationControlOptions: {
+            style: google.maps.NavigationControlStyle.SMALL,
+          },
+        };
+        var map = new google.maps.Map(
+          document.getElementById("map"),
+          myOptions
+        );
+        var marker = new google.maps.Marker({
+          position: latlon,
+          map: map,
+          title: "당신의 현 위치...",
+        });
+      }
+
+      function showError(error) {
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            x.innerHTML = "사용자가 지리적 위치에 대한 요청을 거부하였습니다.";
+            break;
+          case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "위치 정보를 이용할 수 없습니다.";
+            break;
+          case error.TIMEOUT:
+            x.innerHTML = "위치 요청이 시간 초과되었습니다.";
+            break;
+          case error.UNKNOWN_ERROR:
+            x.innerHTML = "알 수 없는 오류가 발생했습니다.";
+            break;
+        }
+      }
+    </script>
+  </body>
+</html>

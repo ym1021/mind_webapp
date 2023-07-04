@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  </head>
+
+  <body>
+    <div data-role="page">
+      <div data-role="header">
+        <h1>팝업상자 데모</h1>
+      </div>
+      <div data-role="main" class="ui-content">
+        <a
+          href="#myPopup1"
+          data-rel="popup"
+          class="ui-btn ui-corner-all ui-btn-inline"
+        >
+          팝업
+        </a>
+        <div data-role="popup" id="myPopup1">
+          <p>이것은 간단한 팝업상자입니다.</p>
+        </div>
+        <a
+          href="#myPopupDialog"
+          data-rel="popup"
+          data-position-to="window"
+          data-transition="fade"
+          class="ui-btn ui-corner-all ui-shadow ui-btn-inline"
+        >
+          대화상자 팝업 열기
+        </a>
+        <div data-role="popup" id="myPopupDialog">
+          <div data-role="header">
+            <h1>대화상자 머리말</h1>
+          </div>
+          <div data-role="main" class="ui-content">
+            <a
+              href="#myPopupDialog"
+              data-rel="popup"
+              data-position-to="window"
+              data-transition="fade"
+              class="ui-btn ui-corner-all ui-shadow ui-btn-inline"
+            >
+              대화상자 팝업
+            </a>
+            <div data-role="main" class="ui-content">
+              <h2>마라톤</h2>
+              <a
+                href="#"
+                data-rel="back"
+                class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right"
+              >
+                닫기
+              </a>
+              <p>
+                달리기 초보자가 지켜야 할 3대 원칙: 생각하는 속도보다 더 천천히
+                달려라. 생각하는 거리보다 더 짧게 달려라. 생각하는 회수보다 더
+                자주 달려라
+              </p>
+            </div>
+          </div>
+          <div data-role="footer">
+            <h1>대화상자 꼬리말</h1>
+          </div>
+        </div>
+        <a href="#myPopup2" data-rel="popup" data-position-to="window">
+          <img
+            src="../img/m.jpg"
+            alt="마라톤 사진"
+            style="width: 70px; height: 50px"
+          />
+        </a>
+        <div data-role="popup" id="myPopup2" data-overlay-theme="b">
+          <p>마라톤 대회 사진</p>
+          <a
+            href="#pageone"
+            data-rel="back"
+            class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-notext ui-btn-right"
+            >닫기</a
+          >
+          <img
+            src="../img/m.jpg"
+            alt="마라톤 사진"
+            style="width: 90%; height: 60%"
+          />
+        </div>
+      </div>
+      <div data-role="footer">
+        <h1>ISA Lab.</h1>
+      </div>
+    </div>
+  </body>
+</html>

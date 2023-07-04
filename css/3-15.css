@@ -1,0 +1,23 @@
+#Example_A {
+  background-color: #009900;
+  padding: 20px;
+  width: 100px;
+  height: 50px;
+  border-radius: 5px;
+  /*horizontal, vertical */
+  box-shadow: 5px 5px black;
+}
+
+#Example_B {
+  background-color: #cc0000;
+  padding: 20px;
+  width: 100px;
+  height: 50px;
+  border-radius: 5px;
+  /* horizontal, vertical, blur */
+  box-shadow: 5px 5px 5px black;
+}
+
+h1 {
+  text-shadow: 2px 2px red;
+}

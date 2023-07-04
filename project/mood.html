@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>감정 일기</title>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <style>
+      .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body onload="doShowAll()">
+    <div data-role="page">
+      <div data-role="header" class="w3-container w3-teal">
+        <h1 >고요한 마음을 위해</h1>
+      </div>
+      <div role="main" class="ui-content">
+        <a href="main.html" data-icon="home" class="ui-link ui-btn ui-icon-home ui-btn-icon-top w3-sand">홈</a>
+        <div data-role="navbar" data-grid="c">
+          <ul>
+            <li>
+              <a href="stress.html" class="w3-sand">스트레스</a>
+            </li>
+            <li>
+              <a href="meditations.html"class="w3-sand">명상</a>
+            </li>
+            <li>
+              <a href="mood.html" class="w3-sand">감정 일기</a>
+            </li>
+            <li>
+              <a href="counsel.html"class="w3-sand">상담센터</a>
+            </li>
+          </ul>
+        </div>
+        <div class="center">
+          <img src="../img/SereneMind.png" />
+        </div>
+        <form name="editor">
+          <div id="hoge">
+            <p>
+              <label for="name">날짜: ex)2023.06.20</label>
+              <input type="text" name="name" id="name" />
+            </p>
+            <p>
+              <label for="data">감정: ex) 기분 최고, 평온해, 걱정돼</label>
+              <textarea name="data" id="data" cols="41" rows="10"></textarea>
+              <input
+                type="button"
+                value="일기 저장"
+                class="w3-teal"
+                onclick="doSetItem()"
+              />
+              <input
+                type="button"
+                value="일기 불러오기"
+                class="w3-teal"
+                onclick="doGetItem()"
+              />
+              <p>* 일기 저장이 안될 경우 새로고침을 누르고 다시 시도해주세요.<br>* 날짜 입력 후 일기 불러오기</p>
+            </p>
+          </div>
+          <div id="items_table">
+            <h2>일기 목록</h2>
+            <table
+              id="pairs"
+              data-role="table"
+              data-mode="columntoggle"
+              class="ui-responsive ui-shadow"
+            >
+              <thead>
+                <tr>
+                  <th data-priority="1">날짜</th>
+                  <th data-priority="2">감정</th>
+                  <th data-priority="3">동작</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            <p>
+              <label>
+                <input
+                  type="button"
+                  value="모든 일기 삭제"
+                  class="w3-teal"
+                  onclick="doClear()"
+                />
+              </label>
+            </p>
+          </div>
+        </form>
+      </div>
+      <div
+        data-role="footer"
+        data-position="fixed"
+        data-id="footer"
+        class="w3-container w3-teal w3-opacity"
+      >
+        <h1>웹앱개발 텀프로젝트<br />스마트IoT전공 20116940 김보경</h1>
+      </div>
+    </div>
+
+    <script>
+      function doSetItem() {
+        var name = document.forms.editor.name.value;
+        var data = document.forms.editor.data.value;
+
+        if (name.trim() === "" || data.trim() === "") {
+          alert("날짜와 감정을 입력하세요.");
+          return;
+        }
+
+        localStorage.setItem(name, data);
+        doShowAll();
+        document.forms.editor.name.value = "";
+        document.forms.editor.data.value = "";
+      }
+
+      function doGetItem() {
+        var name = document.forms.editor.name.value;
+        document.forms.editor.data.value = localStorage.getItem(name);
+        doShowAll();
+      }
+
+      function doRemoveItem() {
+        var name = document.forms.editor.name.value;
+        localStorage.removeItem(name);
+        doShowAll();
+        document.forms.editor.name.value = "";
+        document.forms.editor.data.value = "";
+      }
+
+      function doClear() {
+        localStorage.clear();
+        doShowAll();
+        document.forms.editor.name.value = "";
+        document.forms.editor.data.value = "";
+      }
+
+      function doShowAll() {
+        // if (performance.navigation.type === 1) {
+        //   location.reload(true);
+        // }
+        var key = "";
+        var pairs = "";
+        var i = 0;
+
+        for (i = 0; i < localStorage.length; i++) {
+          key = localStorage.key(i);
+          pairs +=
+            "<tr><td>" +
+            key +
+            "</td><td>" +
+            localStorage.getItem(key) +
+            "</td><td><button onclick=\"removeItem('" +
+            key +
+            "')\">삭제</button></td></tr>";
+        }
+
+        if (pairs === "") {
+          pairs += '<tr><td colspan="3"><i>일기가 없습니다.</i></td></tr>';
+        }
+
+        $("#pairs tbody").html(pairs);
+        $("#pairs").table("refresh");
+      }
+
+      function removeItem(name) {
+        localStorage.removeItem(name);
+        doShowAll();
+      }
+    </script>
+  </body>
+</html>

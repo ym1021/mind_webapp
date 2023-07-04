@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mental Health App</title>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  </head>
+  <body>
+    <div data-role="page">
+      <div data-role="header">
+        <h1>Mental Health App</h1>
+      </div>
+      <div data-role="content">
+        <h2>Mood Tracking</h2>
+        <p>How are you feeling today?</p>
+        <input type="range" min="1" max="10" value="5" id="moodSlider" />
+        <span id="moodValue">5</span>
+
+        <h2>Guided Meditations</h2>
+        <ul data-role="listview">
+          <li><a href="meditation1.mp3">Meditation 1</a></li>
+          <li><a href="meditation2.mp3">Meditation 2</a></li>
+          <li><a href="meditation3.mp3">Meditation 3</a></li>
+        </ul>
+
+        <h2>Stress Management Exercises</h2>
+        <ol data-role="listview">
+          <li>Deep breathing</li>
+          <li>Progressive muscle relaxation</li>
+          <li>Mindfulness exercises</li>
+        </ol>
+      </div>
+      <script>
+        $(document).on("pagecreate", function () {
+          // Update the mood value as the slider value changes
+          $("#moodSlider").on("input", function () {
+            $("#moodValue").text($(this).val());
+          });
+        });
+      </script>
+    </div>
+  </body>
+</html>
